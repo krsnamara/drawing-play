@@ -99,9 +99,11 @@
         }
 
         canvas {
-            border: solid black 5px;
+            /* border: solid black 5px; */
             margin-bottom: 25px;
             touch-action: none;
+            width: 100vw; /* Set canvas width to 100% of viewport width */
+            height: calc(100vh - 150px); /* Set canvas height to 100% of viewport height minus 150px for the controls */
         }
 
         @media screen and (min-width: 480px) {
@@ -128,8 +130,12 @@
         // for the canvas area
         const canvas = document.querySelector('#draw');
         const ctx = canvas.getContext('2d');
-        canvas.width = window.innerWidth * 0.97;
-        canvas.height = window.innerHeight * 0.80;
+        function resizeCanvas() {
+            canvas.width = window.innerWidth * 0.97;
+            canvas.height = window.innerHeight * 0.80;
+        }
+
+        resizeCanvas()
         ctx.strokeStyle = '#00ff55';
         ctx.lineJoin = 'round';
         ctx.lineCap = 'round';
@@ -185,7 +191,7 @@
         
         inputs.forEach(input => input.addEventListener('change', handleUpdate));
         inputs.forEach(input => input.addEventListener('mousemove', handleUpdate));
-        
+        window.addEventListener('resize', resizeCanvas);
         </script>
 </body>
 </html>
