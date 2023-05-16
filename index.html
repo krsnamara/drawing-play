@@ -8,7 +8,7 @@
       </head>
       <body>
     <div class="wrapper">
-        <canvas id="draw" width="800" height="auto"></canvas>
+        <canvas id="draw" ></canvas>
         <div class="controls">
             <div class="container">
                 <label for="sizing">Size of Brush</label>
@@ -16,9 +16,13 @@
             </div>
             <div class="container">
                 <label for="base">Brush Color</label>
-                <input type="color" id="base" name="base" value="#ffc600">
+                <input type="color" id="base" name="base" value="#00ff55">
             </div>
             <div class="radio-container">
+                <div class="radios">
+                    <input type="radio" id="noEffect" name="effect" value="noEffect" />
+                    <label for="noEffect">No Effect</label>
+                </div>
                 <div class="radios">
                     <input type="radio" id="luminosity" name="effect" value="luminosity" />
                     <label for="luminosity">Luminosity</label>
@@ -36,18 +40,17 @@
     </div>
     <style>
         :root {
-          --base: #ffc600;
+          --base: #00ff55;
           --sizing: 10px;
         }
 
-        img {
-          padding: var(--spacing);
-          background: var(--base);
-          filter: blur(var(--blur));
+        canvas {
+            margin: 10px;
         }
-    
-        .hl {
-          color: var(--base);
+
+        .wrapper {
+            display: flex;
+            flex-direction: column;
         }
     
         /*
@@ -77,14 +80,21 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
+            gap: 20px;
         }
 
         .radio-container {
             display: flex;
+            gap: 10px;
+            padding-left: 10px;
+        }
+
+        .radios {
+            display: flex;
+            flex-direction: column;
         }
     
-        input {
+        .container input {
           width: 150px;
         }
 
@@ -99,13 +109,15 @@
         // for the canvas area
         const canvas = document.querySelector('#draw');
         const ctx = canvas.getContext('2d');
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-        ctx.strokeStyle = '#BADA55';
+        canvas.width = window.innerWidth * 0.97;
+        canvas.height = window.innerHeight * 0.80;
+        ctx.strokeStyle = '#00ff55';
         ctx.lineJoin = 'round';
         ctx.lineCap = 'round';
         ctx.lineWidth = 25;
-        // ctx.globalCompositeOperation = 'luminosity';
+        // ctx.globalCompositeOperation = 'none';
+        // ctx.globalCompositeOperation = 'multiply';
+        ctx.globalCompositeOperation = 'luminosity';
         // ctx.globalCompositeOperation = 'multiply';
         
         let isDrawing = false;
