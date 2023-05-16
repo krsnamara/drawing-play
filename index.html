@@ -8,7 +8,7 @@
       </head>
       <body>
     <div class="wrapper">
-        <canvas id="draw" ></canvas>
+        <canvas id="draw"></canvas>
         <div class="controls">
             <div class="container">
                 <label for="sizing">Size of Brush</label>
@@ -101,7 +101,25 @@
         canvas {
             border: solid black 5px;
             margin-bottom: 25px;
-            height: fit-content;
+        }
+
+        @media screen and (min-width: 480px) {
+        body {
+            background-color: lightgreen;
+        }
+        .controls {
+          display: flex;
+          flex-wrap: wrap;
+
+          margin-bottom: 50px;
+          justify-content: center;
+          align-items:last center;
+          gap: 25px;
+          position: fixed;
+          bottom: 0;
+        }
+
+
         }
         </style>
     <script>
